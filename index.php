@@ -5,6 +5,8 @@
  * Version: 1.0.0
  * Author: Djordje Arsenovic
  * Author URI: https://djolecodes.com
+ * Text Domain: dj_wcp
+ * Domain Path: /languages
  */
 
 class DjoleCodesWordCount
@@ -14,6 +16,16 @@ class DjoleCodesWordCount
         add_action('admin_menu', [$this, 'addSettingsPage']);
         add_action('admin_init', [$this, 'settings']);
         add_filter('the_content', [$this, 'ifWrap']);
+        add_action('init', [$this, 'languages']);
+    }
+
+    /**
+     * Sets up translations for when user changes the WordPress language
+     * @return void
+     */
+    public function languages(): void
+    {
+        load_plugin_textdomain('dj_wcp', false, dirname(plugin_basename(__FILE__)) . '/languages');
     }
 
     /**
@@ -32,7 +44,11 @@ class DjoleCodesWordCount
         return $content;
     }
 
-    public function createHTML($content)
+    /**
+     * @param $content
+     * @return string
+     */
+    public function createHTML($content): string
     {
         $title = get_option('dj_wcp_title', 'Post stats');
         $location = get_option('dj_wcp_location', '0');
@@ -46,7 +62,7 @@ class DjoleCodesWordCount
         }
 
         if ($displayWordCount) {
-            $html .= 'This post has ' . $wordCount . ' words. <br/>';
+            $html .= __('This post has', 'dj_wcp') . ' ' . $wordCount . ' ' . __('words.', 'dj_wcp') . '<br/>';
         }
 
         if ($displayCharacterCount) {
@@ -77,7 +93,7 @@ class DjoleCodesWordCount
      */
     public function addSettingsPage(): void
     {
-        add_options_page('Word Count Settings', 'Word Count', 'manage_options', 'dj-word-count-settings-page', [$this, 'settingsPage']);
+        add_options_page('Word Count Settings', __('Word Count', 'dj_wcp'), 'manage_options', 'dj-word-count-settings-page', [$this, 'settingsPage']);
     }
 
     /**

@@ -1,0 +1,45 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Word count\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-07-08 14:58+0000\n"
+"PO-Revision-Date: 2023-07-08 14:59+0000\n"
+"Last-Translator: Djordje Arsenovic\n"
+"Language-Team: Serbian\n"
+"Language: sr_RS\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
+"n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.6.4; wp-6.2.2\n"
+"X-Domain: dj_wcp"
+
+#. Description of the plugin
+msgid "Counts the words in the posts and displays it in the post. Simple."
+msgstr ""
+
+#. Author of the plugin
+msgid "Djordje Arsenovic"
+msgstr "Djordje Arsenovic"
+
+#. Author URI of the plugin
+msgid "https://djolecodes.com"
+msgstr ""
+
+#: index.php:61
+msgid "This post has"
+msgstr "Ovaj clanak ima"
+
+#: index.php:92
+msgid "Word Count"
+msgstr "Broj Reci"
+
+#. Name of the plugin
+msgid "Word count"
+msgstr "Broj reci"
+
+#: index.php:61
+msgid "words."
+msgstr "reci."
