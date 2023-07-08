@@ -62,7 +62,7 @@ class DjoleCodesWordCount
         }
 
         if ($displayWordCount) {
-            $html .= __('This post has', 'dj_wcp') . ' ' . $wordCount . ' ' . __('words.', 'dj_wcp') . '<br/>';
+            $html .= esc_html__('This post has', 'dj_wcp') . ' ' . $wordCount . ' ' . esc_html__('words.', 'dj_wcp') . '<br/>';
         }
 
         if ($displayCharacterCount) {
@@ -93,7 +93,7 @@ class DjoleCodesWordCount
      */
     public function addSettingsPage(): void
     {
-        add_options_page('Word Count Settings', __('Word Count', 'dj_wcp'), 'manage_options', 'dj-word-count-settings-page', [$this, 'settingsPage']);
+        add_options_page('Word Count Settings', esc_html__('Word Count', 'dj_wcp'), 'manage_options', 'dj-word-count-settings-page', [$this, 'settingsPage']);
     }
 
     /**
