@@ -13,6 +13,57 @@ class DjoleCodesWordCount
     {
         add_action('admin_menu', [$this, 'addSettingsPage']);
         add_action('admin_init', [$this, 'settings']);
+        add_filter('the_content', [$this, 'ifWrap']);
+    }
+
+    /**
+     * @param $content
+     * @return mixed
+     */
+    public function ifWrap($content)
+    {
+        if ((is_main_query() && is_single()) && (
+                get_option('dj_wcp_display_word_count', '1') ||
+                get_option('dj_wcp_char_count', '1') ||
+                get_option('dj_wcp_display_reading_time', '1'))) {
+            return $this->createHTML($content);
+        }
+
+        return $content;
+    }
+
+    public function createHTML($content)
+    {
+        $title = get_option('dj_wcp_title', 'Post stats');
+        $location = get_option('dj_wcp_location', '0');
+        $displayWordCount = get_option('dj_wcp_display_word_count', '1');
+        $displayReadingTime = get_option('dj_wcp_display_reading_time', '1');
+        $displayCharacterCount = get_option('dj_wcp_char_count', '1');
+
+        $html = '<h3>' . esc_html($title) . '</h3> <p>';
+        if ($displayWordCount || $displayReadingTime) {
+            $wordCount = str_word_count(strip_tags($content));
+        }
+
+        if ($displayWordCount) {
+            $html .= 'This post has ' . $wordCount . ' words. <br/>';
+        }
+
+        if ($displayCharacterCount) {
+            $html .= 'This post has ' . strlen(strip_tags($content)) . ' characters. <br/>';
+        }
+
+        if ($displayReadingTime) {
+            $html .= 'This post will take ' . round($wordCount / 225) . ' minute(s) to read. <br/>';
+        }
+
+        $html .= '</p>';
+
+        if ($location === '0') {
+            return $html . $content;
+        }
+
+        return $content . $html;
     }
 
     /**
