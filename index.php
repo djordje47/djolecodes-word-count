@@ -72,11 +72,27 @@ class DjoleCodesWordCount
         /**
          * Register the wp_options row for saving the settings value to the database
          */
-        register_setting('dj_word_count_plugin', 'dj_wcp_location', ['sanitize_callback' => 'sanitize_text_field', 'default' => '0']);
+        register_setting('dj_word_count_plugin', 'dj_wcp_location', ['sanitize_callback' => [$this, 'locationValidation'], 'default' => '0']);
         register_setting('dj_word_count_plugin', 'dj_wcp_title', ['sanitize_callback' => 'sanitize_text_field', 'default' => 'Post stats']);
         register_setting('dj_word_count_plugin', 'dj_wcp_display_word_count', ['sanitize_callback' => 'sanitize_text_field', 'default' => '1']);
         register_setting('dj_word_count_plugin', 'dj_wcp_char_count', ['sanitize_callback' => 'sanitize_text_field', 'default' => '0']);
         register_setting('dj_word_count_plugin', 'dj_wcp_display_reading_time', ['sanitize_callback' => 'sanitize_text_field', 'default' => '1']);
+    }
+
+    /**
+     * @param $input
+     * @return string
+     */
+    public function locationValidation($input): string
+    {
+        if ($input != '0' && $input != '1') {
+            // Adds wp error
+            add_settings_error('dj_wcp_location', 'dj_wcp_location_error', 'Display location must be beginning or end of the post.');
+            // Sets value to the default
+            return get_option('dj_wcp_location');
+        }
+
+        return $input;
     }
 
     /**
@@ -117,4 +133,5 @@ class DjoleCodesWordCount
         </select>
     <?php }
 }
+
 $djoleCodesWordCount = new DjoleCodesWordCount();
