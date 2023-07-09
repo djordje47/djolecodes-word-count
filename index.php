@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Word count
+ * Plugin Name: DjoleCodes - Word count
  * Description: Counts the words in the posts and displays it in the post. Simple.
  * Version: 1.0.0
  * Author: Djordje Arsenovic
